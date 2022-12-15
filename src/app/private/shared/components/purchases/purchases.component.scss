@@ -1,0 +1,16 @@
+article {
+  // height: 250px;
+}
+.cancelado,
+.cancelada,
+.rechazada {
+  color: rgb(233, 131, 131);
+}
+.entregado,
+.realizada {
+  color: rgb(40, 179, 95);
+}
+
+ngb-pagination ::ng-deep a {
+  color: black !important;
+}

@@ -1,0 +1,61 @@
+<nav class="container-fluid bg-primary py-4 shadow-sm">
+  <div class="container">
+    <div class="row row-cols-2">
+      <figure class="col-5 mb-0 d-flex align-items-center">
+        <a routerLink="/"
+          ><img
+            src="/assets/img/logo__large_plus@2x.png"
+            alt="Mercado Libre Logo"
+            class="d-block w-100"
+        /></a>
+      </figure>
+      <div class="col-7">
+        <div class="row">
+          <div class="d-flex flex-row align-items-center justify-content-end">
+            <ngx-skeleton-loader
+              *ngIf="!userData.name"
+              count="1"
+              appearance="line"
+              class="my-0 me-2"
+              [theme]="{
+                'margin-bottom': 0,
+                width: '100px',
+                height: '10px'
+              }"
+            ></ngx-skeleton-loader>
+            <p class="my-0 me-2" *ngIf="userData.name">
+              <small
+                >Hola
+                <b
+                  ><a
+                    routerLink="/profile"
+                    class="text-reset text-decoration-none"
+                    >{{ userData.name }}!</a
+                  ></b
+                ></small
+              >
+            </p>
+
+            <ngx-skeleton-loader
+              *ngIf="!userData.imageUrl"
+              count="1"
+              appearance="circle"
+              class="my-0 justify-content-center d-flex"
+              [theme]="{
+                margin: 0,
+                width: '30px',
+                height: '30px'
+              }"
+            ></ngx-skeleton-loader>
+            <img
+              *ngIf="userData.imageUrl"
+              [src]="userData.imageUrl"
+              alt="User avatar"
+              class="rounded-circle my-0 nav-user-avatar"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
