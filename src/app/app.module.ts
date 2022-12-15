@@ -1,15 +1,14 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ApiService } from './services/api.service';
 import { HeaderNavComponent } from './public/shared/modules/header-nav/header-nav.component';
-import { HttpService } from './services/http.service';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ApiService } from './services/api.service';
 import { GetUserService } from './services/get-user.service';
-import { LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import { HttpService } from './services/http.service';
 
 import localeEsCl from '@angular/common/locales/es-CL';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

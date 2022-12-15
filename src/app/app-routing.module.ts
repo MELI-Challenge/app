@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./public/pages/home/home.module').then((m) => m.HomeModule),
+    redirectTo: 'profile',
+    pathMatch: 'full',
   },
   {
     path: 'profile',
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: '*',
-    redirectTo: '',
+    redirectTo: 'profile',
   },
 ];
 

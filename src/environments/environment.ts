@@ -1,5 +1,9 @@
 export const environment = {
   production: false,
+  pagination: {
+    startingPage: 1,
+    pageSize: 4,
+  },
   api: {
     url: 'http://localhost:8000/',
     endpoints: {

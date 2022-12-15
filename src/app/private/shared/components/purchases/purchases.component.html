@@ -1,93 +1,16 @@
 <h3 class="mt-5 col-12">Tus compras</h3>
 <ng-container *ngIf="purchasesData; else purchasesLoader">
-  <article
-    class="bg-white shadow-sm rounded-1 mt-3 px-3 pb-0 col flex-column justify-content-center"
-    *ngFor="
-      let purchase of purchasesData
-        | slice : (page - 1) * pageSize : page * pageSize
-    "
-  >
-    <header
-      class="border-bottom pt-2 pb-1 mb-0 align-content-center row row-cols-auto"
-    >
-      <p class="fs-6 mb-0 row">
-        <small>#{{ purchase.id }}</small>
-      </p>
-      <p class="fs-6 ps-2 ms-2 border-start mb-0 row">
-        <small>{{ purchase.date | date : "d MMM y" }}</small>
-      </p>
-      <div class="shipment-status-info ps-2 ms-2 border-start row">
-        <p
-          *ngIf="purchase.shipment; else statusLoader"
-          [ngClass]="purchase.shipment.status"
-          class="mb-0"
-        >
-          <small>{{ purchase.shipment.status | titlecase }}</small>
-        </p>
-        <ng-template #statusLoader>
-          <ngx-skeleton-loader
-            count="1"
-            appearance="line"
-            animation="progress"
-            class="my-0"
-            [theme]="{
-              'background-color': '#fff15999',
-              margin: 0,
-              width: '100px',
-              height: '10px'
-            }"
-          ></ngx-skeleton-loader>
-        </ng-template>
-      </div>
-    </header>
-    <section class="py-4 row align-items-center">
-      <figure class="article-image col-3 col-md-1">
-        <img
-          class="img-fluid"
-          [src]="purchase.imageUrl"
-          [alt]="purchase.title"
-        />
-      </figure>
-      <div
-        class="ps-4 d-flex flex-column flex-md-row justify-content-around justify-content-md-between col-9 col-md-11"
-      >
-        <div class="row flex-grow-1">
-          <div class="col-12 col-md-6">
-            <h4 class="w-100 fs-5 mb-2">
-              {{ purchase.title }}
-            </h4>
-          </div>
-          <div class="col-12 col-md-2 offset-md-2">
-            <p class="mb-0">
-              <small class="fs-6">Cantidad: {{ purchase.quantity }}</small>
-            </p>
-            <p class="mb-0">
-              <small>
-                {{
-                  purchase.price.total
-                    | currency
-                      : purchase.price.currency
-                      : "symbol-narrow"
-                      : "4.2-2"
-                }}
-              </small>
-            </p>
-          </div>
-          <div
-            class="d-grid d-md-flex justify-content-md-end col-12 col-md-2 align-items-center"
-          >
-            <button
-              type="button"
-              class="btn btn-secondary btn text-white d-md-inline-block"
-              (click)="open(content, purchase)"
-            >
-              Ver compra
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  </article>
+  <ng-container>
+    <app-purchase-summary
+      *ngFor="
+        let purchase of purchasesData
+          | slice : (page - 1) * pageSize : page * pageSize
+      "
+      [purchase]="purchase"
+      [content]="content"
+      (purchaseEmitter)="setSelectedPurchase($event)"
+    ></app-purchase-summary>
+  </ng-container>
 
   <!-- PAGINATION -->
   <ngb-pagination
@@ -110,71 +33,11 @@
         (click)="modal.close()"
       ></button>
     </div>
-
-    <h4 class="modal-title w-100" id="modal-basic-title">
-      {{ selectedPurchaseData.title }}
-    </h4>
   </div>
   <div class="modal-body">
-    <img
-      class="w-50 d-flex mx-auto"
-      [src]="selectedPurchaseData.imageUrl"
-      [alt]="selectedPurchaseData.title"
-    />
-
-    <p class="fs-4 pb-1 mb-1 mt-4 border-bottom">
-      <b>Detalle de la compra</b>
-    </p>
-
-    <table class="table table-borderless mt-4 purchase-details">
-      <tr class="fs-6">
-        <td>ID compra</td>
-        <td>#{{ selectedPurchaseData.id }}</td>
-      </tr>
-      <tr class="fs-6">
-        <td>Total</td>
-        <td>
-          {{
-            selectedPurchaseData.price.total
-              | currency
-                : selectedPurchaseData.price.currency
-                : "symbol-narrow"
-                : "4.2-2"
-          }}
-        </td>
-      </tr>
-      <tr class="fs-6">
-        <td>Vendido por</td>
-        <td>
-          {{ selectedPurchaseData.seller.nickname }}
-        </td>
-      </tr>
-      <tr class="fs-6">
-        <td>Fecha compra</td>
-        <td>
-          {{ selectedPurchaseData.date | date : "d MMM y" }}
-        </td>
-      </tr>
-      <tr class="fs-6">
-        <td>Cantidad</td>
-        <td>
-          {{ selectedPurchaseData.quantity }}
-          {{ selectedPurchaseData.quantity > 1 ? "unidades" : "unidad" }}
-        </td>
-      </tr>
-      <tr class="fs-6">
-        <td>Estado pago</td>
-        <td [class]="selectedPurchaseData.payment?.status">
-          {{ selectedPurchaseData.payment?.status | titlecase }}
-        </td>
-      </tr>
-      <tr class="fs-6">
-        <td>Estado envío</td>
-        <td [class]="selectedPurchaseData.shipment?.status">
-          {{ selectedPurchaseData.shipment?.status | titlecase }}
-        </td>
-      </tr>
-    </table>
+    <app-purchase-modal-data
+      [selectedPurchaseData]="selectedPurchaseData"
+    ></app-purchase-modal-data>
   </div>
 </ng-template>
 

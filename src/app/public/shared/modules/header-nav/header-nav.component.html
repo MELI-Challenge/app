@@ -1,17 +1,17 @@
 <nav class="container-fluid bg-primary py-4 shadow-sm">
   <div class="container">
-    <div class="row row-cols-2">
-      <figure class="col-5 mb-0 d-flex align-items-center">
+    <div class="row row-cols-2 align-items-center justify-content-between">
+      <figure class="col-5 col-md-2 mb-0 d-flex align-items-center">
         <a routerLink="/"
           ><img
-            src="/assets/img/logo__large_plus@2x.png"
+            src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.12/mercadolibre/logo__large_plus@2x.png"
             alt="Mercado Libre Logo"
             class="d-block w-100"
         /></a>
       </figure>
-      <div class="col-7">
-        <div class="row">
-          <div class="d-flex flex-row align-items-center justify-content-end">
+      <div class="col-7 col-md-10">
+        <div class="d-flex flex-row">
+          <div class="col d-flex align-items-center justify-content-end">
             <ngx-skeleton-loader
               *ngIf="!userData.name"
               count="1"

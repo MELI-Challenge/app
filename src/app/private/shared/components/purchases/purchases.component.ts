@@ -1,9 +1,9 @@
-import { Component, ElementRef, OnInit, TemplateRef } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { Purchase } from 'src/app/public/shared/interfaces/api/purchase.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUserService } from 'src/app/services/get-user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-purchases',
@@ -11,19 +11,16 @@ import { GetUserService } from 'src/app/services/get-user.service';
   styleUrls: ['./purchases.component.scss'],
 })
 export class PurchasesComponent implements OnInit {
-  page = 1;
-  pageSize = 2;
+  page = environment.pagination.startingPage;
+  pageSize = environment.pagination.pageSize;
   purchasesData!: Purchase[];
-
   selectedPurchaseData!: Purchase;
-  viewedPurchases: Purchase[] = [];
 
   user$ = this.getUserService.userDataBS$;
 
   constructor(
     private apiService: ApiService,
-    private getUserService: GetUserService,
-    private modalService: NgbModal
+    private getUserService: GetUserService
   ) {}
 
   ngOnInit(): void {
@@ -57,13 +54,7 @@ export class PurchasesComponent implements OnInit {
       .subscribe();
   }
 
-  open(content: TemplateRef<ElementRef>, purchase: Purchase) {
-    const index = this.viewedPurchases.findIndex(
-      (_purchase) => _purchase.id === purchase.id
-    );
-    index === -1 ? this.viewedPurchases.push(purchase) : null;
-    console.log(this.viewedPurchases);
+  setSelectedPurchase(purchase: Purchase) {
     this.selectedPurchaseData = purchase;
-    this.modalService.open(content, { centered: true });
   }
 }
