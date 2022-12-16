@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { Level } from '../public/shared/interfaces/api/level.interface';
 import { Payment } from '../public/shared/interfaces/api/payment.interface';
 import { Purchase } from '../public/shared/interfaces/api/purchase.interface';
 import { Restriction } from '../public/shared/interfaces/api/restriction.interface';
 import { Shipment } from '../public/shared/interfaces/api/shipment.interface';
 import { User } from '../public/shared/interfaces/api/user.interface';
-import { Failure, Result, Success } from '../utils/result';
 import { HttpService } from './http.service';
 
-type ServiceId =
+export type ServiceId =
   | 'users'
   | 'shipments'
   | 'restrictions'

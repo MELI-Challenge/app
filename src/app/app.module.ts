@@ -6,12 +6,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderNavComponent } from './public/shared/modules/header-nav/header-nav.component';
-import { ApiService } from './services/api.service';
 import { GetUserService } from './services/get-user.service';
 import { HttpService } from './services/http.service';
 
 import localeEsCl from '@angular/common/locales/es-CL';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ApiService } from './services/api.service';
 
 registerLocaleData(localeEsCl, 'es-CL');
 
@@ -25,8 +25,8 @@ registerLocaleData(localeEsCl, 'es-CL');
     NgbModule,
   ],
   providers: [
-    ApiService,
     HttpService,
+    ApiService,
     GetUserService,
     { provide: LOCALE_ID, useValue: 'es-CL' },
   ],

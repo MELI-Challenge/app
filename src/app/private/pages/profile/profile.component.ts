@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
-import { ApiService } from 'src/app/services/api.service';
-import { GetUserService } from 'src/app/services/get-user.service';
+import { ApiService } from '../../../services/api.service';
+import { GetUserService } from '../../../services/get-user.service';
 import { Level } from 'src/app/public/shared/interfaces/api/level.interface';
 import { Purchase } from 'src/app/public/shared/interfaces/api/purchase.interface';
 import { Restriction } from 'src/app/public/shared/interfaces/api/restriction.interface';

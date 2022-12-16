@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { Purchase } from 'src/app/public/shared/interfaces/api/purchase.interface';
-import { ApiService } from 'src/app/services/api.service';
-import { GetUserService } from 'src/app/services/get-user.service';
-import { environment } from 'src/environments/environment';
+import { ApiService } from '../../../../services/api.service';
+import { GetUserService } from '../../../../services/get-user.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-purchases',
