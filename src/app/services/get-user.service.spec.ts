@@ -1,22 +1,15 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
+import { mockUser } from 'tests/utils/mock-user';
 import { ApiService } from './api.service';
 import { GetUserService } from './get-user.service';
 
 describe('SetUserService', () => {
   let service: GetUserService;
 
-  const fakeUser = {
-    id: 1,
-    name: 'Mercadolibre',
-    lastName: 'User',
-    level: 'ORO',
-    imageUrl: 'imageUrl',
-  };
-
   class ApiServiceMock {
-    getUser = jest.fn().mockImplementation(() => of(fakeUser));
+    getUser = jest.fn().mockImplementation(() => of(mockUser));
   }
 
   beforeEach(() => {
@@ -32,6 +25,6 @@ describe('SetUserService', () => {
 
   it('should return user data', () => {
     const userData = service.getUserData();
-    expect(userData).toEqual(fakeUser);
+    expect(userData).toEqual(mockUser);
   });
 });
