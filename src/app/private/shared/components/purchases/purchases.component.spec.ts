@@ -11,6 +11,9 @@ import { registerLocaleData } from '@angular/common';
 import localeCl from '@angular/common/locales/es-CL';
 import { Component, ElementRef, Input, TemplateRef } from '@angular/core';
 import { Purchase } from 'src/app/public/shared/interfaces/api/purchase.interface';
+import { mockShipment } from 'tests/utils/mock-shipment';
+import { mockPayment } from 'tests/utils/mock-payment';
+import { isFormRecord } from '@angular/forms';
 registerLocaleData(localeCl, 'es-cl');
 
 describe('PurchasesComponent', () => {
@@ -31,7 +34,7 @@ describe('PurchasesComponent', () => {
     }
 
     getShipment(shipmentId: string) {
-      return Observable;
+      return of(mockShipment);
     }
 
     getRestrictions(userId: string) {
@@ -43,7 +46,7 @@ describe('PurchasesComponent', () => {
     }
 
     getPayment(paymentId: string) {
-      return Observable;
+      return of(mockPayment);
     }
 
     getLevel(levelId: string) {
@@ -73,8 +76,22 @@ describe('PurchasesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set all data', () => {
-    expect(component.purchasesData).toEqual([mockPurchase]);
+  it('should set all purchases data from services', () => {
+    const fullPurchaseData = {
+      ...mockPurchase,
+      shipment: mockShipment,
+      payment: mockPayment,
+    };
+    expect(component.purchasesData).toEqual([fullPurchaseData]);
+    expect(component.purchasesData[0].shipment).not.toBeUndefined();
+    expect(component.purchasesData[0].shipment).not.toEqual({});
+    expect(component.purchasesData[0].payment).not.toBeUndefined();
+    expect(component.purchasesData[0].payment).not.toEqual({});
+  });
+
+  it('should set selected purchase data', () => {
+    component.setSelectedPurchase(mockPurchase);
+    expect(component.selectedPurchaseData).toEqual(mockPurchase);
   });
 });
 

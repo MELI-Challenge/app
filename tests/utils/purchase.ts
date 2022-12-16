@@ -1,3 +1,5 @@
+import { mockShipment } from './mock-shipment';
+
 export const mockPurchase = {
   id: 1,
   title: 'faketitle',
@@ -14,12 +16,4 @@ export const mockPurchase = {
   },
   transactionId: 123123,
   shipmentId: 567567,
-  shipment: {
-    id: 2,
-    status: 'enviado',
-  },
-  payment: {
-    id: 2,
-    status: 'enviado',
-  },
 };
